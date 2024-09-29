@@ -14,11 +14,11 @@ set(SOURCE_DIR src)
 add_compile_options(-Wall -Wextra -Wpedantic)
 
 # Añadir directorios de inclusión para los archivos de cabecera
-#include_directories(${CMAKE_SOURCE_DIR}/src/Stack_LL)
+include_directories(${CMAKE_SOURCE_DIR}/src/Stack_LL)
 include_directories(${CMAKE_SOURCE_DIR}/src/Stack_A)
 
 # add all those sources to executable
-#add_executable(${PROJECT_NAME}_LL ${SOURCE_DIR}/principal_ll.c  ${SOURCE_DIR}/Stack_LL/stack_ll.c)
+add_executable(${PROJECT_NAME}_LL ${SOURCE_DIR}/principal_ll.c  ${SOURCE_DIR}/Stack_LL/stack_ll.c)
 
 add_executable(${PROJECT_NAME}_A ${SOURCE_DIR}/principal_a.c  ${SOURCE_DIR}/Stack_A/stack_a.c)
 
@@ -26,4 +26,4 @@ add_executable(${PROJECT_NAME}_A ${SOURCE_DIR}/principal_a.c  ${SOURCE_DIR}/Stac
 add_executable(${PROJECT_NAME}_TA ${SOURCE_DIR}/test_a.c  ${SOURCE_DIR}/Stack_A/stack_a.c)
 
 
-#add_executable(${PROJECT_NAME}_TLL ${SOURCE_DIR}/test_ll.c  ${SOURCE_DIR}/Stack_LL/stack_ll.c)
+add_executable(${PROJECT_NAME}_TLL ${SOURCE_DIR}/test_ll.c  ${SOURCE_DIR}/Stack_LL/stack_ll.c)
