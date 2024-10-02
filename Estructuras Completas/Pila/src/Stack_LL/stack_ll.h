@@ -22,7 +22,7 @@ struct Stack_ll
 {
     struct Node * top;
     int size;
-};
+} ;
 
 
 /**
@@ -37,7 +37,9 @@ void stack_ll_init(struct Stack_ll **ptrStack);
  * @param element  Elemento a añadir
  */
 void stack_ll_push(struct Stack_ll *ptrStack, struct Node element);
-
+/* Comentario propio. Originalmente pasaba un struct Node. o tendría sentido que pasase un puntero al Node en vez del Node?
+* Lo voy a modificar para que tenga sentido 
+*/
 
 /**
  * @brief Devuelve el elemento en la cima de la pila
