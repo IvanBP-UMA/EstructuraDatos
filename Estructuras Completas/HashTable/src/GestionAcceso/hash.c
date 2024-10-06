@@ -9,7 +9,7 @@ struct Hash * crearHashTable(int capacidad){
     }
     newHash->capacidad = capacidad;
     newHash->tamano = 0;
-    newHash->listaPersonas = (struct Node*)malloc(sizeof(struct Node)*capacidad);
+    newHash->listaPersonas = (struct Node**)malloc(sizeof(struct Node*)*capacidad);
     if(newHash->listaPersonas == NULL){
         printf("No memory");
     }
@@ -31,17 +31,14 @@ void insertar(struct Hash *hash, struct Persona *persona){
     }
 
     newNode->persona = persona;
-    newNode->next = NULL;
-
+    
     if (hash->listaPersonas[personHash] != NULL){
-        struct Node* aux = hash->listaPersonas[personHash];
-        while (aux->next != NULL){
-            aux = aux->next;
-        }
-        aux->next = newNode;
+        newNode->next = hash->listaPersonas[personHash];
     }else{
-        hash->listaPersonas[personHash] = newNode;
+        newNode->next = NULL;
     }
+    hash->tamano++;
+    hash->listaPersonas[personHash] = newNode;
 }
 
 struct Persona * buscar(struct Hash *hash, int id){
@@ -59,9 +56,29 @@ struct Persona * buscar(struct Hash *hash, int id){
 void eliminar(struct Hash *hash, int id){
     int personHash = hashFunc(id, hash->capacidad);
 
-    struct Node** aux = hash->listaPersonas[personHash];
-    while ((*aux)->persona->id != id){
-        aux = &(*aux)->next;
+    struct Node** head = hash->listaPersonas + personHash;
+    while ((*head) != NULL && (*head)->persona->id != id){
+        head = &(*head)->next;
     }
-    free(*aux); 
+    if (*head != NULL){
+        struct Node* aux = (*head)->next;
+        free(*head); 
+        *head = aux;
+        hash->tamano--;
+    }
+}
+
+void printLinkedList(struct Node* head){
+    while (head != NULL ){
+        mostrarPersona(head->persona);
+        head = head->next;
+    }    
+}
+
+void mostrar(const struct Hash *hash){
+    for (int i = 0; i<hash->capacidad; i++){
+        printf("[%i]: \n", i);
+        printLinkedList(hash->listaPersonas[i]);
+        printf("\n");
+    }
 }
