@@ -3,3 +3,5 @@
 */build
 */*.zip
 Practice/
+Java/*/.idea
+Java/*/target
