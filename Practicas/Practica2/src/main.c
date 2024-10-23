@@ -1,3 +1,7 @@
+/*
+NOMBRE: Iván Bezares Pino
+*/
+
 #include <stdlib.h>
 #include <stdio.h>
 #include "lista_enlazada_doble.h"
