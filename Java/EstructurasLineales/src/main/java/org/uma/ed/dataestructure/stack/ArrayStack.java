@@ -53,40 +53,60 @@ public class ArrayStack<T> extends AbstractStack<T> implements Stack<T> {
         ArrayStack<T> stack = new ArrayStack<>(that.size());
         if (that.size() > 1){
             System.arraycopy(that.elements, 0, stack.elements, 0, that.size);
+            stack.size = that.size();
         }
         return stack;
     }
 
     public static <T> ArrayStack<T> copyOf(Stack<T> that) {
-        return null;
+        ArrayStack<T> newStack = new ArrayStack<>(that.size());
+        ArrayStack<T> aux = new ArrayStack<>(that.size());
+
+        while (!that.isEmpty()){
+            aux.push(that.top());
+            that.pop();
+        }
+
+        while (!aux.isEmpty()){
+            that.push(aux.top());
+            newStack.push(aux.top());
+            aux.pop();
+        }
+
+        return newStack;
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return size == 0;
     }
 
 
     @Override
     public int size() {
-        return -1;
+        return size;
     }
 
 
     @Override
     public void push(T element) {
-        //
+        if (size == elements.length){
+            System.arraycopy(this.elements, 0, this.elements, 0, this.elements.length * 2);
+        }
+        elements[size] = element;
+        size++;
     }
 
     @Override
     public T top() {
-        //
-        return null;
+        if (this.isEmpty()){throw new EmptyStackException();}
+        return elements[size - 1];
     }
     
     @Override
     public void pop() {
-       //
+        if (this.isEmpty()){throw new EmptyStackException();}
+       size--;
     }
 
 
