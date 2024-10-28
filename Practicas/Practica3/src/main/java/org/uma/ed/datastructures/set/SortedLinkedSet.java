@@ -224,64 +224,54 @@ public class SortedLinkedSet<T> extends AbstractSortedSet<T> implements SortedSe
     SortedLinkedSetBuilder<T> res = new SortedLinkedSetBuilder<>(comparator);
     Iterator<T> iter1 = set1.iterator();
     Iterator<T> iter2 = set2.iterator();
-    T current1 = null;
-    T current2 = null;
-    if (iter1.hasNext()){current1 = iter1.next();}
-    if (iter2.hasNext()){current2 = iter2.next();}
+    T current1 = iter1.hasNext()? iter1.next() : null;
+    T current2 = iter2.hasNext()? iter2.next() : null;
 
-    while (iter1.hasNext() && iter2.hasNext()){
+    while (current1 != null && current2 != null){
       if (comparator.compare(current1, current2) < 0){
         res.append(current1);
-        current1 = iter1.next();
+        current1 = iter1.hasNext()? iter1.next() : null;
       }else if(comparator.compare(current1, current2) == 0) {
         res.append(current1);
-        current1 = iter1.next();
-        current2 = iter2.next();
+        current1 = iter1.hasNext()? iter1.next() : null;
+        current2 = iter2.hasNext()? iter2.next() : null;
       }else{
        res.append(current2);
-       current2 = iter2.next();
+       current2 = iter2.hasNext()? iter2.next() : null;
       }
     }
 
-    while (iter1.hasNext()){
+    while (current1 != null){
       res.append(current1);
-      current1 = iter1.next();
+      current1 = iter1.hasNext()? iter1.next() : null;
     }
 
-    if(current1 != null){
-      res.append(current1);
-    }
-
-    while (iter2.hasNext()){
+    while (current2 != null){
       res.append(current2);
-      current2 = iter2.next();
-    }
-
-    if(current2 != null){
-      res.append(current2);
+      current2 = iter2.hasNext()? iter2.next() : null;
     }
 
     return res.toSortedLinkedSet();
   }
 
   public static <T> SortedLinkedSet<T> intersection(SortedSet<T> set1, SortedSet<T> set2){
-    if (!set1.comparator().equals(set2.comparator())){throw new IllegalArgumentException("Comparadores deben ser iguales");}
+    if (!set1.comparator().equals(set2.comparator())){throw new IllegalArgumentException("intersection: both sorted sets must use same comparator");}
     Comparator<T> comparator = set1.comparator();
     SortedLinkedSetBuilder<T> res = new SortedLinkedSetBuilder<>(comparator);
     Iterator<T> iter1 = set1.iterator();
     Iterator<T> iter2 = set2.iterator();
-    T current1 = iter1.next();
-    T current2 = iter2.next();
+    T current1 = iter1.hasNext()? iter1.next() : null;
+    T current2 = iter2.hasNext()? iter2.next() : null;
 
-    while (iter1.hasNext() && iter2.hasNext()){
+    while (current1 != null && current2 != null){
       if (comparator.compare(current1, current2) < 0){
-        current1 = iter1.next();
+        current1 = iter1.hasNext()? iter1.next() : null;
       }else if(comparator.compare(current1, current2) == 0) {
         res.append(current1);
-        current1 = iter1.next();
-        current2 = iter2.next();
+        current1 = iter1.hasNext()? iter1.next() : null;
+        current2 = iter2.hasNext()? iter2.next() : null;
       }else{
-        current2 = iter2.next();
+        current2 = iter2.hasNext()? iter2.next() : null;
       }
     }
 
@@ -289,28 +279,29 @@ public class SortedLinkedSet<T> extends AbstractSortedSet<T> implements SortedSe
   }
 
   public static <T> SortedLinkedSet<T> difference(SortedSet<T> set1, SortedSet<T> set2){
-    if (!set1.comparator().equals(set2.comparator())){throw new IllegalArgumentException("Comparadores deben ser iguales");}
+    if (!set1.comparator().equals(set2.comparator())){throw new IllegalArgumentException("difference: both sorted sets must use same comparator");}
     Comparator<T> comparator = set1.comparator();
     SortedLinkedSetBuilder<T> res = new SortedLinkedSetBuilder<>(comparator);
     Iterator<T> iter1 = set1.iterator();
     Iterator<T> iter2 = set2.iterator();
-    T current1 = iter1.next();
-    T current2 = iter2.next();
+    T current1 = iter1.hasNext()? iter1.next() : null;
+    T current2 = iter2.hasNext()? iter2.next() : null;
 
-    while (iter1.hasNext() && iter2.hasNext()){
+    while (current1 != null && current2 != null){
       if (comparator.compare(current1, current2) < 0){
         res.append(current1);
-        current1 = iter1.next();
+        current1 = iter1.hasNext()? iter1.next() : null;
       }else if(comparator.compare(current1, current2) == 0) {
-        current1 = iter1.next();
-        current2 = iter2.next();
+        current1 = iter1.hasNext()? iter1.next() : null;
+        current2 = iter2.hasNext()? iter2.next() : null;
       }else{
-        current2 = iter2.next();
+        current2 = iter2.hasNext()? iter2.next() : null;
       }
     }
 
-    while (iter1.hasNext()){
-      res.append(iter1.next());
+    while (current1 != null){
+      res.append(current1);
+      current1 = iter1.hasNext()? iter1.next() : null;
     }
 
     return res.toSortedLinkedSet();
