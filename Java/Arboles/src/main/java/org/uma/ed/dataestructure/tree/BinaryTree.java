@@ -74,6 +74,10 @@ public class BinaryTree {
         }
     }
 
+    private static boolean isLeaf(Node<?> node){
+        return (node.left == null && node.right == null);
+    }
+
     /**
      * Returns the number of nodes in a binary tree.
      *
@@ -82,7 +86,12 @@ public class BinaryTree {
      * @return The number of nodes in the tree.
      */
     public static int size(Node<?> root) {
-        throw  new UnsupportedOperationException();
+        int res = 0;
+        if (root != null){
+            res = 1;
+            res += size(root.left) + size(root.right);
+        }
+        return res;
     }
 
     /**
@@ -93,7 +102,12 @@ public class BinaryTree {
      * @return The height of the tree.
      */
     public static int height(Node<?> root) {
-        throw  new UnsupportedOperationException();
+        int res = 0;
+        if (root != null){
+            res = 1;
+            res += Math.max(height(root.left), height(root.right));
+        }
+        return res;
     }
 
     /**
@@ -104,7 +118,12 @@ public class BinaryTree {
      * @return The sum of the elements in the tree.
      */
     public static int sum(Node<Integer> root) {
-        throw  new UnsupportedOperationException();
+        int res = 0;
+        if (root != null){
+            res = root.element;
+            res += sum(root.left) + sum(root.right);
+        }
+        return res;
     }
 
     /**
@@ -128,7 +147,12 @@ public class BinaryTree {
      * @return The number of times the element appears in the tree.
      */
     public static int count(Node<Integer> root, int element) {
-        throw  new UnsupportedOperationException();
+        int res = 0;
+        if (root != null){
+            res = (root.element == element)? 1 : 0;
+            res += count(root.left, element) + count(root.right, element);
+        }
+        return res;
     }
 
     /**
@@ -139,7 +163,11 @@ public class BinaryTree {
      * @return The leaves of the tree.
      */
     public static <T> List<T> leaves(Node<T> root) {
-        throw  new UnsupportedOperationException();
+        List<T> res = ArrayList.empty();
+        if (root != null){
+            leaves(root, res);
+        }
+        return res;
     }
 
     /**
@@ -150,7 +178,14 @@ public class BinaryTree {
      * @param <T> The type of elements in the tree.
      */
     private static <T> void leaves(Node<T> root, List<T> leaves) {
-        throw  new UnsupportedOperationException();
+        if (root != null){
+            if (isLeaf(root)){
+                leaves.append(root.element);
+            }else{
+                leaves(root.left, leaves);
+                leaves(root.right, leaves);
+            }
+        }
     }
 
     /**
@@ -161,7 +196,11 @@ public class BinaryTree {
      * @return The preorder traversal of the tree.
      */
     public static <T> List<T> preorder(Node<T> root) {
-        throw  new UnsupportedOperationException();
+        List<T> res = ArrayList.empty();
+        if (root!= null){
+            preorder(root, res);
+        }
+        return res;
     }
 
     /**
@@ -172,7 +211,11 @@ public class BinaryTree {
      * @param <T> The type of elements in the tree.
      */
     private static <T> void preorder(Node<T> root, List<T> traversal) {
-        throw  new UnsupportedOperationException();
+        if (root != null){
+            traversal.append(root.element);
+            preorder(root.left, traversal);
+            preorder(root.right, traversal);
+        }
     }
 
     /**
@@ -183,7 +226,11 @@ public class BinaryTree {
      * @return The postorder traversal of the tree.
      */
     public static <T> List<T> postorder(Node<T> root) {
-        throw  new UnsupportedOperationException();
+        List<T> res = ArrayList.empty();
+        if (root != null){
+            postorder(root, res);
+        }
+        return res;
     }
 
     /**
@@ -194,7 +241,11 @@ public class BinaryTree {
      * @param <T> The type of elements in the tree.
      */
     private static <T> void postorder(Node<T> root, List<T> traversal) {
-        throw  new UnsupportedOperationException();
+        if (root != null){
+            postorder(root.left, traversal);
+            postorder(root.right, traversal);
+            traversal.append(root.element);
+        }
     }
 
     /**
@@ -205,7 +256,11 @@ public class BinaryTree {
      * @return The inorder traversal of the tree.
      */
     public static <T> List<T> inorder(Node<T> root) {
-        throw  new UnsupportedOperationException();
+        List<T> res = ArrayList.empty();
+        if (root != null){
+            inorder(root, res);
+        }
+        return res;
     }
 
     /**
@@ -216,7 +271,11 @@ public class BinaryTree {
      * @param <T> The type of elements in the tree.
      */
     private static <T> void inorder(Node<T> root, List<T> traversal) {
-        throw  new UnsupportedOperationException();
+        if (root != null){
+            inorder(root.left, traversal);
+            traversal.append(root.element);
+            inorder(root.right, traversal);
+        }
     }
 
     /**
@@ -227,6 +286,23 @@ public class BinaryTree {
      * @return The breadth-first traversal of the tree.
      */
     public static <T> List<T> breadthFirst(Node<T> root) {
-        throw  new UnsupportedOperationException();
+        List<T> res = ArrayList.empty();
+        if (root != null) {
+            Queue<Node<T>> auxQueue = ArrayQueue.empty();
+            auxQueue.enqueue(root);
+            Node<T> currentFirst;
+            while (!auxQueue.isEmpty()){
+                currentFirst = auxQueue.first();
+                res.append(currentFirst.element);
+                if (currentFirst.left != null){
+                    auxQueue.enqueue(currentFirst.left);
+                }
+                if (currentFirst.right != null) {
+                    auxQueue.enqueue(currentFirst.right);
+                }
+                auxQueue.dequeue();
+            }
+        }
+        return res;
     }
 }

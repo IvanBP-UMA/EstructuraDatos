@@ -37,7 +37,7 @@ public class TreeBinaryDemo {
         System.out.println(BinaryTree.sum(tree));
 
         System.out.println("Máximo elemento del arbol");
-        System.out.println(BinaryTree.maximum(tree, Comparator.naturalOrder()));
+        //System.out.println(BinaryTree.maximum(tree, Comparator.naturalOrder()));
 
         System.out.println("Número de veces que aparece 4 en el arbol");
         System.out.println(BinaryTree.count(tree,4));
@@ -50,6 +50,9 @@ public class TreeBinaryDemo {
 
         System.out.println("Postorder del arbol");
         System.out.println(BinaryTree.postorder(tree));
+
+        System.out.println("Inorder del arbol");
+        System.out.println(BinaryTree.inorder(tree));
 
         System.out.println("Orden de anchura del arbol");
         System.out.println(BinaryTree.breadthFirst(tree));
