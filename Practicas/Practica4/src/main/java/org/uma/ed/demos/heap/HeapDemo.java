@@ -1,19 +1,19 @@
 package org.uma.ed.demos.heap;
 
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Random;
+import org.uma.ed.dataestructure.heap.BinaryHeap;
 import org.uma.ed.dataestructure.heap.Heap;
-import org.uma.ed.dataestructure.heap.WBLeftistHeap;
 import org.uma.ed.dataestructure.list.ArrayList;
 import org.uma.ed.dataestructure.list.List;
-
-import java.util.Arrays;
-import java.util.Random;
 
 /**
  * Simple demo program for testing that elements are extracted in increasing order from a heap.
  *
  * @author Pepe Gallardo, Data Structures, Grado en Informática. UMA.
  */
-public class HeapWBLeftistDemo {
+public class HeapDemo {
   private static void printHeapInOrder(Heap<Integer> heap) {
     while (!heap.isEmpty()) {
       System.out.print(heap.minimum()+ " ");
@@ -33,23 +33,20 @@ public class HeapWBLeftistDemo {
     // 3   10    6
 
     System.out.println("Heap 0: --");
-    Heap<Integer> heap0 = WBLeftistHeap.from(list0);
+    Heap<Integer> heap0 = BinaryHeap.from(list0);
     System.out.println(heap0);
-    System.out.println("Heap 0 size: " + heap0.size());
     printHeapInOrder(heap0);
     System.out.println("--------");
 
     System.out.println("Heap 1: --");
-    Heap<Integer> heap1 = WBLeftistHeap.from(list1);
+    Heap<Integer> heap1 = BinaryHeap.from(list1);
     System.out.println(heap1);
-    System.out.println("Heap 1 size: " + heap1.size());
     printHeapInOrder(heap1);
     System.out.println("--------");
 
     System.out.println("Heap 2: --");
-    Heap<Integer> heap2 = WBLeftistHeap.from(list2);
+    Heap<Integer> heap2 = BinaryHeap.from(list2);
     System.out.println(heap2);
-    System.out.println("Heap 2 size: " + heap2.size());
     printHeapInOrder(heap2);
     System.out.println("--------");
 
@@ -67,7 +64,7 @@ public class HeapWBLeftistDemo {
       }
 
       // System.out.println("Array: " + Arrays.toString(array));
-      Heap<Integer> heap = WBLeftistHeap.from(Arrays.asList(array));
+      Heap<Integer> heap = BinaryHeap.from(Arrays.asList(array));
       // System.out.println("Heap: " + heap);
 
       // check heap elements are extracted in increasing order

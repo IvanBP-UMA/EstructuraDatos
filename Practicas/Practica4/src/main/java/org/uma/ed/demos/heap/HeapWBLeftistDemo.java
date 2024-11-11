@@ -1,6 +1,7 @@
 package org.uma.ed.demos.heap;
 
 import org.uma.ed.dataestructure.heap.Heap;
+import org.uma.ed.dataestructure.heap.MaxiphobicHeap;
 import org.uma.ed.dataestructure.heap.WBLeftistHeap;
 import org.uma.ed.dataestructure.list.ArrayList;
 import org.uma.ed.dataestructure.list.List;
