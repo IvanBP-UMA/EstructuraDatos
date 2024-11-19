@@ -333,7 +333,7 @@ public class BST<K> implements SearchTree<K> {
 
     private void delete(Node<K> node, Node<K> parent, int childNum){
         if (parent == null){
-            deleteBSTRoot(root, null, childNum);
+            deleteBSTRoot(root, null);
         }else if (isLeaf(node)){
             if (childNum == 0){
                 parent.left = null;
@@ -353,12 +353,12 @@ public class BST<K> implements SearchTree<K> {
                 parent.right = node.left;
             }
         }else{
-            deleteBSTRoot(node, parent, childNum);
+            deleteBSTRoot(node, parent);
         }
         size--;
     }
 
-    private void deleteBSTRoot(Node<K> root, Node<K> parent, int childNum){
+    private void deleteBSTRoot(Node<K> root, Node<K> parent){
         //El metodo delete nos pide eliminar la raiz de un arbol degenerado con raiz minima
         if (parent == null && comparator.compare(root.key, minimum()) == 0){
             this.root = this.root.right;
@@ -372,24 +372,6 @@ public class BST<K> implements SearchTree<K> {
             root.key = aux.minimum();
             aux.deleteMinimum();
         }
-    }
-
-    private Node<K> findParent(K inSearch){
-        Node<K> n = root;
-        Node<K> parent = null;
-        boolean found = false;
-        while (!found && n != null){
-            if (comparator.compare(n.key, inSearch) == 0){
-                found = true;
-            }else if (comparator.compare(n.key, inSearch) < 0){
-                parent = n;
-                n = n.right;
-            }else{
-                parent = n;
-                n = n.left;
-            }
-        }
-        return parent;
     }
 
     /** Si está vacía lanza la excepción EmptySearchTreeException.

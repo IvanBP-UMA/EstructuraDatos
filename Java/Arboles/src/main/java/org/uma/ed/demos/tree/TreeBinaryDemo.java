@@ -37,7 +37,7 @@ public class TreeBinaryDemo {
         System.out.println(BinaryTree.sum(tree));
 
         System.out.println("Máximo elemento del arbol");
-        //System.out.println(BinaryTree.maximum(tree, Comparator.naturalOrder()));
+        System.out.println(BinaryTree.maximum(tree, Comparator.naturalOrder()));
 
         System.out.println("Número de veces que aparece 4 en el arbol");
         System.out.println(BinaryTree.count(tree,4));

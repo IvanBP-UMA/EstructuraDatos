@@ -174,7 +174,7 @@ public class LinkedQueue<T> extends AbstractQueue<T> implements Queue<T> {
    */
   @Override
   public void enqueue(T element) {
-    Node<T> newNode = new Node<>(element, first);
+    Node<T> newNode = new Node<>(element, null);
     if (first == null){
       first = newNode;
     }else {

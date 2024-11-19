@@ -135,7 +135,27 @@ public class BinaryTree {
      * @return The maximum element in the tree.
      */
     public static int maximum(Node<Integer> root, Comparator<Integer> comparator) {
-        throw  new UnsupportedOperationException();
+        if (root == null){
+            throw new RuntimeException("Empty tree");
+        }
+        int max;
+        if (root.left == null && root.right == null){
+            max = root.element;
+        }else{
+            if (root.left == null){
+                int maxLeft = maximum(root.right, comparator);
+                max = (comparator.compare(root.element, maxLeft) < 0)? maxLeft : root.element;
+            }else if (root.right == null){
+                int maxRight = maximum(root.left, comparator);
+                max = (comparator.compare(root.element, maxRight) < 0)? maxRight : root.element;
+            }else{
+                int maxLeft = maximum(root.right, comparator);
+                int maxRight = maximum(root.left, comparator);
+                max = (comparator.compare(root.element, maxLeft) < 0)? maxLeft : root.element;
+                max = (comparator.compare(max, maxRight) < 0)? maxRight : max;
+            }
+        }
+        return max;
     }
 
     /**
