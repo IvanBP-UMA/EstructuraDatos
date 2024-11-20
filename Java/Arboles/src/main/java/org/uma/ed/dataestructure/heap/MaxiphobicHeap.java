@@ -24,6 +24,7 @@ public class MaxiphobicHeap<T> implements Heap<T>{
       this(element, 1, null, null);
     }
   }
+
   private MaxiphobicHeap(Comparator<T> comparator, Node<T> root){
     this.comparator = comparator;
     this.root = root;

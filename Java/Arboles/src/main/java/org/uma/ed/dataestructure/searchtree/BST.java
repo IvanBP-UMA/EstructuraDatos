@@ -1,7 +1,5 @@
 package org.uma.ed.dataestructure.searchtree;
 
-
-import org.uma.ed.dataestructure.heap.EmptyHeapException;
 import org.uma.ed.dataestructure.list.ArrayList;
 import org.uma.ed.dataestructure.list.List;
 
@@ -186,17 +184,15 @@ public class BST<K> implements SearchTree<K> {
         }
         Node<K> parent = null;
         Node<K> current = root;
-        while (current != null && !isLeaf(current)){
+        while (current.left != null && !isLeaf(current)){
             parent = current;
             current = current.left;
         }
 
         if (parent == null){
-            root = null;
-        }else if (current == null){
             root = root.right;
         }else {
-            parent.left = null;
+            parent.left = current.right;
         }
         size--;
     }
@@ -212,18 +208,15 @@ public class BST<K> implements SearchTree<K> {
         }
         Node<K> parent = null;
         Node<K> current = root;
-        while (current != null && !isLeaf(current)){
+        while (current.right != null && !isLeaf(current)){
             parent = current;
             current = current.right;
         }
 
         if (parent == null){
-            root = null;
-        }
-        else if (current == null){
             root = root.left;
         }else {
-            parent.right = null;
+            parent.right = current.left;
         }
         size--;
     }
@@ -362,6 +355,8 @@ public class BST<K> implements SearchTree<K> {
         //El metodo delete nos pide eliminar la raiz de un arbol degenerado con raiz minima
         if (parent == null && comparator.compare(root.key, minimum()) == 0){
             this.root = this.root.right;
+        }else if (parent == null && comparator.compare(root.key, maximum()) == 0){//El metodo delete nos pide eliminar la raiz de un arbol degenerado con raiz máxima
+            this.root = this.root.left;
         }else {//Casos normales
             BST<K> aux = empty(comparator());
             if (parent == null) {

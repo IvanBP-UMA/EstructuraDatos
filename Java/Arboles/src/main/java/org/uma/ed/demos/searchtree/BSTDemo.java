@@ -38,7 +38,7 @@ public class BSTDemo {
         }
 
         System.out.println(iter2String(t.preOrder().iterator(),"Preorder"));
-        System.out.println(iter2String(t.preOrder().iterator(), "PostOrder"));
+        System.out.println(iter2String(t.postOrder().iterator(),"PostOrder"));
         System.out.println(iter2String(t.inOrder().iterator(), "InOrder"));
 
         System.out.println("Minim " + t.minimum());

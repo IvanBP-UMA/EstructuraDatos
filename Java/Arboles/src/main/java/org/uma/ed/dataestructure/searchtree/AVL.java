@@ -295,7 +295,7 @@ public class AVL<K> implements SearchTree<K> {
             if (cmp < 0){
                 aux = delete(node.right, key);
                 if (aux != null && comparator.compare(aux.key, key) == 0){
-                    delete(node.right, node, 1);
+                    deleteNode(node.right, node, 1);
                     res = node.balanced();
                 }else if (aux != null){
                     node.right = aux;
@@ -306,7 +306,7 @@ public class AVL<K> implements SearchTree<K> {
             }else if (cmp > 0){
                 aux = delete(node.left, key);
                 if (aux != null && comparator.compare(aux.key, key) == 0){
-                    delete(node.left, node, 0);
+                    deleteNode(node.left, node, 0);
                     res = node.balanced();
                 }else if (aux != null){
                     node.left = aux;
@@ -322,7 +322,7 @@ public class AVL<K> implements SearchTree<K> {
     }
 
     //Delete a node given itself, its parent and childNumber being 0 if left child or 1 if right child
-    private void delete(Node<K> node, Node<K> parent, int childNum){
+    private void deleteNode(Node<K> node, Node<K> parent, int childNum){
         if (parent == null){
             deleteRoot(root, null);
         }else if (node.left == null && node.right == null){
@@ -359,6 +359,7 @@ public class AVL<K> implements SearchTree<K> {
         }
         root.key = aux.minimum();
         aux.deleteMinimum();
+        root.right = aux.root;
     }
 
     // Sugerencia si lo quieres hacer recursivo. uno para recorrer y otro para eliminar.   private Node<K> delete(Node<K> node, K key)     private Node<K> delete(Node<K> node)
@@ -405,17 +406,22 @@ public class AVL<K> implements SearchTree<K> {
             throw new EmptySearchTreeException();
         }
         root = deleteMinimum(root);
+
         size--;
     }
 
     private static <K> Node<K> deleteMinimum(Node<K> node){
         if (node.left == null){
-            node = null;
+            if (node.height > 1){
+                node = node.right;
+            }else {
+                node = null;
+            }
         }else {
             Node<K> aux = deleteMinimum(node.left);
             if (aux == null){
                 node.left = node.left.right;
-                node.balanced();
+                node = node.balanced();
             }else {
                 node.left = aux;
             }
@@ -440,12 +446,16 @@ public class AVL<K> implements SearchTree<K> {
 
     private static <K> Node<K> deleteMaximum(Node<K> node){
         if (node.right == null){
-            node = null;
+            if (node.height > 1){
+                node = node.left;
+            }else{
+                node = null;
+            }
         }else {
             Node<K> aux = deleteMaximum(node.right);
             if (aux == null){
                 node.right = node.right.left;
-                node.balanced();
+                node = node.balanced();
             }else {
                 node.right = aux;
             }
