@@ -19,8 +19,8 @@ public class BreadthFirstTraversal<V> {
     public List<V> traverse() {
         List<V> res = new ArrayList<>();
         Queue<V> aux = new LinkedList<>();
-
         aux.add(source);
+
         while (!aux.isEmpty()){
             V value = aux.remove();
             if (!res.contains(value)){

@@ -24,7 +24,8 @@ public class DFTDemo {
             System.out.println("DFT: " + dftResult);
             System.out.println("DFT: [A, C, B, D]");
             System.out.println("DFT: [A, B, D, c]");
-
+            System.out.println("DFT Path: " + dft.traversePath());
+            dft.reconstruirCamino("e");
         }
     }
 
