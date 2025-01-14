@@ -34,6 +34,7 @@ public class Astar {
    */
   public static <V extends Location> Tuple2<Double, List<V>> findPath(
       WeightedGraph<V, Double> weightedGraph,  V source, V dest) {
+
     record Extension<V>(V source, V destination, Double totalCost, Double realCost, List<V> path) implements Comparable<Extension<V>> {
       @Override
       // Best extension is the one with the smallest total cost.
