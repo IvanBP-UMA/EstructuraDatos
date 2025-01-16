@@ -92,7 +92,7 @@ public class AStarDemo {
     Location source = new Location(36.720, -4.420); //malaga
     Location goal = new Location(37.388, -5.982); //sevilla
     Tuple2<Double, List<Location>> dictionary1 = Astar.findPath(weightedGraph, source,goal);
-    System.out.printf("Costs of shortest paths from vertex %s to vertex %s are :\n", source, goal, dictionary1._1());
+    System.out.printf("Costs of shortest paths from vertex %s to vertex %s are %s:\n", source, goal, dictionary1._1());
     for (var point: dictionary1._2()){
       System.out.print(point + " ");
     }
@@ -101,7 +101,7 @@ public class AStarDemo {
     source = new Location(36.834, -2.463);; //almeria
     goal = new Location(37.261, -6.949);; //huelva
     dictionary1 = Astar.findPath(weightedGraph, source,goal);
-    System.out.printf("Costs of shortest paths from vertex %s to vertex %s are :\n", source, goal, dictionary1._1());
+    System.out.printf("Costs of shortest paths from vertex %s to vertex %s are %s:\n", source, goal, dictionary1._1());
     for (var point: dictionary1._2()){
       System.out.print(point + " ");
     }
